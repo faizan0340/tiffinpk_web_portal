@@ -54,5 +54,34 @@
       });
     });
   </script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="main.dart.js" type="application/javascript"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+
+  <script>
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDoT5n5arKK1YxBudejdnKprWsokBGIINc",
+    authDomain: "tiffan-pk.firebaseapp.com",
+    databaseURL: "https://tiffan-pk-default-rtdb.firebaseio.com",
+    projectId: "tiffan-pk",
+    storageBucket: "tiffan-pk.appspot.com",
+    messagingSenderId: "398992383197",
+    appId: "1:398992383197:web:4e92ca85e7ab8b46780f34",
+    measurementId: "G-H4C25FRBG5"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+
 </body>
 </html>

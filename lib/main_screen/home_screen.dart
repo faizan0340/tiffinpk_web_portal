@@ -1,7 +1,13 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tiffinpk_web_portal/Xsl_sheet/export_sheet.dart';
+import 'package:tiffinpk_web_portal/authentication/login_screen.dart';
+import 'package:tiffinpk_web_portal/sellers/all_blocked_sellers_screen.dart';
+import 'package:tiffinpk_web_portal/sellers/all_verified_sellers_screen.dart';
+import 'package:tiffinpk_web_portal/users/blocked_user.dart';
+import 'package:tiffinpk_web_portal/users/verified_account.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -71,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen>
                 offset: Offset(0, 3), // changes position of shadow
               ),
             ],
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [
                 Colors.green,
                 Colors.green,
@@ -94,13 +100,13 @@ class _HomeScreenState extends State<HomeScreen>
       ),
       body: Center(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Text(
                 timeText + "\n" + dateText,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   color: Colors.green,
                   letterSpacing: 3,
@@ -128,8 +134,9 @@ class _HomeScreenState extends State<HomeScreen>
 
                   ),
 
-                  onPressed: (){
-
+                  onPressed: ()
+                  {
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const VerifiedAccount()));
                   },
                 ),
                 const SizedBox(
@@ -150,8 +157,9 @@ class _HomeScreenState extends State<HomeScreen>
                     padding: const EdgeInsets.all(40),
                     backgroundColor: Colors.green,
                   ),
-                  onPressed: (){
-
+                  onPressed: ()
+                  {
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const BlockedUsersAccount()));
                   },
                 ),
               ],
@@ -180,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
 
                   onPressed: (){
-
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const AllVerifiedSellersScreen()));
                   },
                 ),
                 const SizedBox(
@@ -202,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen>
                     backgroundColor: Colors.green,
                   ),
                   onPressed: (){
-
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const AllBlockedSellersScreen()));
                   },
                 ),
               ],
@@ -233,6 +241,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
 
                   onPressed: (){
+                    // Navigator.push(context, MaterialPageRoute(builder: (c)=> const ActiveRiders()));
 
                   },
                 ),
@@ -255,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen>
                     backgroundColor: Colors.green,
                   ),
                   onPressed: (){
-
+                    // Navigator.push(context, MaterialPageRoute(builder: (c)=> const BlockedRiders()));
                   },
                 ),
               ],
@@ -263,26 +272,60 @@ class _HomeScreenState extends State<HomeScreen>
             const SizedBox(
               height: 40,
             ),
-            ElevatedButton.icon(
-              icon: const Icon(Icons.logout, color: Colors.white,),
-              label: Text(
-                "Logout".toUpperCase(),
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  letterSpacing: 3,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.logout, color: Colors.white,),
+                  label: Text(
+                    "Logout".toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      letterSpacing: 3,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(40),
+                    backgroundColor: Colors.green,
+
+                  ),
+
+                  onPressed: ()
+                  {
+                    FirebaseAuth.instance.signOut();
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const  LoginScreen()));
+                  },
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(40),
-                backgroundColor: Colors.green,
 
-              ),
+                const SizedBox(
+                  width: 20,
+                ),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.download, color: Colors.white,),
+                  label: Text(
+                    "Export Xls".toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      letterSpacing: 3,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(40),
+                    backgroundColor: Colors.green,
 
-              onPressed: (){
+                  ),
 
-              },
+                  onPressed: ()
+                  {
+
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const  ExportSheet()));
+                  },
+                ),
+              ],
             ),
+
 
           ],
         ),
